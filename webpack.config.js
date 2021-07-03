@@ -13,7 +13,8 @@ fs.readdirSync('./src/pages/')
 
 module.exports = {
     entry: entryMap,
-    mode: 'development',
+    mode: process.env.NODE_ENV || 'development',
+    watch: process.env.NODE_ENV !== 'production',
     output: {
         path: path.resolve(__dirname, 'public/build'),
         filename: '[name].js',

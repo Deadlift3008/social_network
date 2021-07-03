@@ -1,21 +1,21 @@
 import * as React from 'react';
 import { AppHOC } from '../components/AppHOC';
-import { PersonInfo } from '../components/PersonInfo';
+import { PeopleList } from '../components/PeopleList';
 import { renderPage } from '../utils/renderPage';
 
-class MainPage extends React.Component {
+class FriendsPage extends React.Component {
     render() {
         return (
             <div>
                 <div className="container">
-                    <h2>Информация обо мне</h2>
+                    <h2>Мои друзья:</h2>
                 </div>
-                <PersonInfo />
+                <PeopleList />
             </div>
         )
     }
 }
 
-const MainPageApp = AppHOC(MainPage);
+const FriendsPageApp = AppHOC(FriendsPage);
 
-renderPage(<MainPageApp />);
+renderPage(<FriendsPageApp />);

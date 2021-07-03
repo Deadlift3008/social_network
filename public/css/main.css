@@ -123,9 +123,17 @@ a:hover, a:active, a:focus {
     color: #ffffff;
 }
 
+.entry-form {
+    margin-top: 25px;
+}
+
 section {
     position: relative;
     padding: 100px 0;
+}
+
+.app-content {
+    margin-top: 90px;
 }
 
 /*---------------------------------------

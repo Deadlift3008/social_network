@@ -3,12 +3,12 @@ import { AppHOC } from '../components/AppHOC';
 import { PersonInfo } from '../components/PersonInfo';
 import { renderPage } from '../utils/renderPage';
 
-class MainPage extends React.Component {
+class UserPage extends React.Component {
     render() {
         return (
             <div>
                 <div className="container">
-                    <h2>Информация обо мне</h2>
+                    <h2>Информация о пользователе:</h2>
                 </div>
                 <PersonInfo />
             </div>
@@ -16,6 +16,6 @@ class MainPage extends React.Component {
     }
 }
 
-const MainPageApp = AppHOC(MainPage);
+const UserPageApp = AppHOC(UserPage);
 
-renderPage(<MainPageApp />);
+renderPage(<UserPageApp />);
