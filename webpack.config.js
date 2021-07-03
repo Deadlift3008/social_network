@@ -1,10 +1,22 @@
 const path = require('path');
+const fs = require('fs');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const entryMap = {};
+
+fs.readdirSync('./src/pages/')
+    .filter(file => {
+        return file.match(/.*\.jsx?$/);
+    })
+    .forEach(f => {
+        entryMap[f.replace(/\.jsx?$/, '')] = ['./src/pages/' + f];
+    });
 
 module.exports = {
-    entry: './src/front/index.js',
+    entry: entryMap,
+    mode: 'development',
     output: {
         path: path.resolve(__dirname, 'public/build'),
-        filename: 'bundle.js',
+        filename: '[name].js',
     },
     module: {
         rules: [
@@ -30,5 +42,8 @@ module.exports = {
     resolve: {
         modules: ['node_modules'],
         extensions: [".js", ".json", ".jsx", ".css"]
-    }
+    },
+    plugins: [
+        new CleanWebpackPlugin()
+    ]
 };

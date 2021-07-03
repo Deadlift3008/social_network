@@ -1,12 +1,20 @@
 const express = require('express')
 const path = require('path');
-const app = express()
-const port = 3000
 
+const app = express();
+const port = 3000;
+
+app.set('view engine', 'pug');
+app.set('views', './src/views');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname+'/index.html'))
+    res.render('main', {
+        title: 'Главная страница',
+        data: JSON.stringify({
+            test: 'Здесь будут данные пользователя'
+        })
+    });
 })
 
 app.listen(port, () => {
