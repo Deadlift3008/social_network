@@ -1,0 +1,19 @@
+{
+  "dev": {
+    "driver": "mysql",
+    "user": "root",
+    "password": "root",
+    "host": "localhost",
+    "database": "social_network_dev",
+    "port": "20144"
+  },
+
+  "prod": {
+    "driver": "mysql",
+    "database": "social_network_prod",
+    "user": { "ENV": "USER" },
+    "password": { "ENV": "PASSWORD" },
+    "host": { "ENV": "HOST" },
+    "port": "20144"
+  }
+}

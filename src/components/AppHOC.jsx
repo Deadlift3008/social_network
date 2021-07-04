@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Menu} from './Menu';
+import { Menu } from './Menu';
 
 export function AppHOC(WrappedComponent) {
     return class extends React.Component {
