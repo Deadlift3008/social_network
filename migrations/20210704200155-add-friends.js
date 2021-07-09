@@ -16,8 +16,19 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db, callback) {
   db.createTable('friends', {
-    user_id: 'int',
-    users_list: { type: 'json' }
+    user_id: {
+      type: 'int',
+      notNull: true,
+      foreignKey: {
+        name: 'friends_users_id_fk',
+        table: 'users',
+        rules: {
+          onDelete: 'CASCADE'
+        },
+        mapping: 'id'
+      }
+    },
+    users_list: 'JSON'
   }, callback);
 };
 

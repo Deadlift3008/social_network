@@ -2,10 +2,11 @@
   "dev": {
     "driver": "mysql",
     "user": "root",
-    "password": "root",
+    "password": "password",
     "host": "localhost",
     "database": "social_network_dev",
-    "port": "20144"
+    "port": "3306",
+    "multipleStatements": true
   },
 
   "prod": {
@@ -14,6 +15,7 @@
     "user": { "ENV": "USER" },
     "password": { "ENV": "PASSWORD" },
     "host": { "ENV": "HOST" },
-    "port": "20144"
+    "port": "20144",
+    "multipleStatements": true
   }
 }

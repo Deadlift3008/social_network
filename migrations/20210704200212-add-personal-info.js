@@ -16,7 +16,18 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db, callback) {
   db.createTable('personal_info', {
-    user_id: 'int',
+    user_id: {
+      type: 'int',
+      notNull: true,
+      foreignKey: {
+        name: 'personal_info_users_id_fk',
+        table: 'users',
+        rules: {
+          onDelete: 'CASCADE'
+        },
+        mapping: 'id'
+      }
+    },
     age: 'smallint',
     gender: 'string',
     name: 'string',
