@@ -1,0 +1,46 @@
+{
+  "name": "social_network",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently --kill-others \"nodemon index.js\" \"webpack\"",
+    "build": "cross-env NODE_ENV=production webpack && node index.js",
+    "migrations:dev:up": "db-migrate up -e dev",
+    "migrations:dev:down": "db-migrate down -e dev",
+    "migrations:prod:up": "db-migrate up -e prod",
+    "migrations:prod:down": "db-migrate down -e prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Deadlift3008/social_network.git"
+  },
+  "author": "deadlift3008",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Deadlift3008/social_network/issues"
+  },
+  "homepage": "https://github.com/Deadlift3008/social_network#readme",
+  "dependencies": {
+    "db-migrate": "^0.11.12",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "pug": "^3.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "concurrently": "^6.2.0",
+    "cross-env": "^7.0.3",
+    "db-migrate-mysql": "^2.1.2",
+    "nodemon": "^2.0.8",
+    "webpack": "^5.41.1",
+    "webpack-cli": "^4.7.2"
+  }
+}
