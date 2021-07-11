@@ -4,6 +4,7 @@ const { main } = require('./main');
 const { registration } = require('./registration');
 const { user } = require('./user');
 const { users } = require('./users');
+const { friendRequests } = require('./friend-requests');
 
 module.exports = {
     authorization,
@@ -11,5 +12,6 @@ module.exports = {
     main,
     registration,
     user,
-    users
+    users,
+    friendRequests
 }

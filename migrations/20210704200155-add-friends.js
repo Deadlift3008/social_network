@@ -28,7 +28,15 @@ exports.up = function(db, callback) {
         mapping: 'id'
       }
     },
-    users_list: 'JSON'
+    friends_list: 'JSON',
+    created_at: {
+      type: 'date',
+      notNull: true
+    },
+    updated_at: {
+      type: 'date',
+      notNull: true
+    }
   }, callback);
 };
 

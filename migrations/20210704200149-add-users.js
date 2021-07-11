@@ -22,7 +22,11 @@ exports.up = function(db, callback) {
       primaryKey: true
     },
     login: 'string',
-    hash_password: 'string'
+    hash_password: 'string',
+    created_at: {
+      type: 'date',
+      notNull: true
+    }
   }, callback);
 };
 

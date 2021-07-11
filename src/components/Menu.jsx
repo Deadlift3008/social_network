@@ -15,7 +15,9 @@ export class Menu extends React.Component {
                             <li><a href="/authorization" className="smoothScroll">Авторизация</a></li>
                             <li><a href="/friends" className="smoothScroll">Друзья</a></li>
                             <li><a href="/users" className="smoothScroll">Пользователи</a></li>
+                            <li><a href="/friend_requests" className="smoothScroll">Запросы в друзья</a></li>
                         </ul>
+                        {/*TODO: Добавить кнопку выхода*/}
                     </div>
                 </div>
             </section>
