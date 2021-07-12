@@ -1,5 +1,16 @@
-async function register(req, res) {
+function validate(fields) {
 
+}
+
+async function register(req, res, model) {
+    const { fields } = req.body;
+
+    const validationError = validate(fields);
+
+    if (validationError) {
+        res.status(500).send({ error: validationError });
+        return;
+    }
 }
 
 module.exports = {
