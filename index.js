@@ -23,7 +23,7 @@ const sess = {
     cookie: {
         maxAge: 1000 * 60  * 60 * 24 // 1 день
     },
-    store: sessionStoreб
+    store: sessionStore,
     saveUninitialized: true,
     resave: false
 }

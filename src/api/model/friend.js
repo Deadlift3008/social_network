@@ -1,15 +1,13 @@
-module.exports = (db, model) => {
+module.exports = (db) => {
     const { query, escape } = db;
 
-    async function getFriendsByUserId(userId) {
+    function getFriendsIdsByUserId(userId) {
         // TODO: можно оптимизировать если использовать JOIN
-        const friendsList = await query(`
+        return query(`
             SELECT * 
             FROM friends f
             WHERE id=${escape(userId)} 
         `);
-
-        return model.user.getUsersByIds(friendsList);
     }
 
     function createFriend(userId, friendId) {
@@ -35,7 +33,7 @@ module.exports = (db, model) => {
     }
 
     return {
-        getFriendsByUserId,
+        getFriendsIdsByUserId,
         createFriend,
         updateFriends
     }
