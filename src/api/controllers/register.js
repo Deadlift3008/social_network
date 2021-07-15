@@ -2,7 +2,7 @@ function validate(fields) {
 
 }
 
-async function register(req, res, model) {
+async function register(req, res, next, model) {
     const { fields } = req.body;
 
     const validationError = validate(fields);

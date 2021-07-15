@@ -1,8 +1,8 @@
-async function login(req, res, model) {
+async function login(req, res, next, model) {
     // здесь будет код логина
 }
 
-async function logout(req, res, model) {
+async function logout(req, res, next, model) {
     // здесь будет код логаута
 }
 

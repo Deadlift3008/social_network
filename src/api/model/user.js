@@ -1,7 +1,16 @@
 module.exports = (db) => {
     const { query, escape } = db;
 
-    function getUsers() {
+    function findUserByLoginAndHash(login, hash) {
+        return query(`
+            SELECT *
+            FROM users
+            WHERE login=${escape(login)}
+            AND hash_password=${escape(hash)}
+        `);
+    }
+
+    function getUsersInfo() {
         return query(`
             SELECT *
             FROM users u
@@ -10,7 +19,15 @@ module.exports = (db) => {
         `);
     }
 
-    function getUserById(id) {
+    function findUserById(id) {
+        return query(`
+            SELECT *
+            FROM users
+            WHERE id=${escape(id)}
+        `);
+    }
+
+    function getUserInfoById(id) {
         return query(`
             SELECT * 
             FROM users u 
@@ -20,7 +37,7 @@ module.exports = (db) => {
         `);
     }
 
-    function getUsersByIds(ids) {
+    function getUsersInfoByIds(ids) {
         return query(`
             SELECT *
             FROM users u
@@ -64,10 +81,12 @@ module.exports = (db) => {
     }
 
     return {
-        getUsers,
-        getUserById,
-        getUsersByIds,
+        getUsersInfo,
+        getUserInfoById,
+        getUsersInfoByIds,
         createUser,
-        createPersonalData
+        createPersonalData,
+        findUserByLoginAndHash,
+        findUserById
     }
 }
