@@ -5,9 +5,9 @@ module.exports = (db) => {
         return query(`
             SELECT *
             FROM friend_requests f
-            WHERE sender=${escape(userId)}
             LEFT JOIN personal_info p
-            ON f.sender=p.user_id
+            ON f.recipient=p.user_id
+            WHERE sender=${escape(userId)}
         `);
     }
 
@@ -15,22 +15,22 @@ module.exports = (db) => {
         return query(`
             SELECT *
             FROM friend_requests f
-            WHERE recipient=${escape(userId)}
             LEFT JOIN personal_info p
-            ON f.recipient=p.user_id
+            ON f.sender=p.user_id
+            WHERE recipient=${escape(userId)}
         `);
     }
 
     function createFriendRequest(senderId, recipientId) {
         const values = [
-            senderId,
-            recipientId,
+            escape(senderId),
+            escape(recipientId),
             'NOW()'
         ];
 
         return query(`
             INSERT INTO friend_requests (sender, recipient, created_at)
-            VALUES (${escape(values.join(', '))})
+            VALUES (${values.join(', ')})
         `);
     }
 

@@ -16,11 +16,17 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db, callback) {
   db.createTable('friends', {
+    id: {
+      type: 'int',
+      notNull: true,
+      autoIncrement: true,
+      primaryKey: true
+    },
     user_id: {
       type: 'int',
       notNull: true,
       foreignKey: {
-        name: 'friends_users_id_fk',
+        name: 'friends_users_user_id_fk',
         table: 'users',
         rules: {
           onDelete: 'CASCADE'
@@ -28,12 +34,19 @@ exports.up = function(db, callback) {
         mapping: 'id'
       }
     },
-    friends_list: 'JSON',
-    created_at: {
-      type: 'date',
-      notNull: true
+    friend_id: {
+      type: 'int',
+      notNull: true,
+      foreignKey: {
+        name: 'friends_users_friend_id_fk',
+        table: 'users',
+        rules: {
+          onDelete: 'CASCADE'
+        },
+        mapping: 'id'
+      }
     },
-    updated_at: {
+    created_at: {
       type: 'date',
       notNull: true
     }
@@ -41,7 +54,11 @@ exports.up = function(db, callback) {
 };
 
 exports.down = function(db, callback) {
-  db.dropTable('friends', callback)
+  db.removeForeignKey('friends', 'friends_users_user_id_fk', () => {
+    db.removeForeignKey('friends', 'friends_users_friend_id_fk', () => {
+      db.dropTable('friends', callback);
+    })
+  });
 };
 
 exports._meta = {
