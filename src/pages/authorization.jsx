@@ -16,6 +16,6 @@ class AuthorizationPage extends React.Component {
     }
 }
 
-const AuthorizationPageApp = AppHOC(AuthorizationPage);
+const AuthorizationPageApp = AppHOC(AuthorizationPage, { isAuthenticated: false });
 
 renderPage(<AuthorizationPageApp />);

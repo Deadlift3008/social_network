@@ -1,6 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const encrypt = require('./utils/encrypt');
+const encrypt = require('../utils/encrypt');
 
 const customFields = {
     usernameField: 'login',
@@ -13,10 +13,10 @@ module.exports = (model) => {
         const login = loginRaw.trim();
         const hash = await encrypt(password);
 
-        const user = await model.user.findUserByLoginAndHash(login, hash);
+        const [user] = await model.user.findUserByLoginAndHash(login, hash);
 
         if (!user) {
-            return done(null, false, { message: 'Неверный логин или пароль' });
+            return done(null, false, { status: 'error', message: 'Неверный логин или пароль' });
         }
 
         return done(null, user);

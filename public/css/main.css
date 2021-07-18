@@ -105,6 +105,7 @@ a:hover, a:active, a:focus {
     box-shadow: none;
     height: 45px;
     margin: 10px 0;
+    color: #fff;
 }
 
 .entry-form .submit-btn {
@@ -125,6 +126,13 @@ a:hover, a:active, a:focus {
 
 .entry-form {
     margin-top: 25px;
+}
+
+.form-error {
+    color: #ff0000;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 section {
@@ -204,6 +212,12 @@ section {
     color: #575757;
     padding-right: 22px;
     padding-left: 22px;
+}
+
+.menu-error-message {
+    color: #ff0000;
+    font-size: 16px;
+    margin-bottom: 15px;
 }
 
 .custom-navbar .navbar-nav > li > a:hover,

@@ -16,6 +16,6 @@ class RegistrationPage extends React.Component {
     }
 }
 
-const RegistrationPageApp = AppHOC(RegistrationPage);
+const RegistrationPageApp = AppHOC(RegistrationPage, { isAuthenticated: false });
 
 renderPage(<RegistrationPageApp />);

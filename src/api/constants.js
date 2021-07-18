@@ -1,0 +1,9 @@
+const AUTH_TYPES = {
+    PAGE_AUTH: 'PAGE_AUTH',
+    REQUEST_AUTH: 'REQUEST_AUTH',
+    INITIAL_AUTH: 'INITIAL_AUTH'
+}
+
+module.exports = {
+    AUTH_TYPES
+}

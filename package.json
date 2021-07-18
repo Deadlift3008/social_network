@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Deadlift3008/social_network#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "db-migrate": "^0.11.12",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.6",

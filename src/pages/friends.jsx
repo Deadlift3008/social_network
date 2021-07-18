@@ -16,6 +16,6 @@ class FriendsPage extends React.Component {
     }
 }
 
-const FriendsPageApp = AppHOC(FriendsPage);
+const FriendsPageApp = AppHOC(FriendsPage, { isAuthenticated: true });
 
 renderPage(<FriendsPageApp />);

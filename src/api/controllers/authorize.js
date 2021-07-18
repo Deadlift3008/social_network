@@ -1,12 +1,9 @@
-async function login(req, res, next, model) {
-    // здесь будет код логина
-}
-
-async function logout(req, res, next, model) {
-    // здесь будет код логаута
+async function logout(req, res) {
+    req.logout();
+    res.status(200);
+    res.json({ status: 'ok' });
 }
 
 module.exports = {
-    login,
     logout
 }

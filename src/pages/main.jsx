@@ -16,6 +16,6 @@ class MainPage extends React.Component {
     }
 }
 
-const MainPageApp = AppHOC(MainPage);
+const MainPageApp = AppHOC(MainPage, { isAuthenticated: true });
 
 renderPage(<MainPageApp />);

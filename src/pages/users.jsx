@@ -16,6 +16,6 @@ class UsersPage extends React.Component {
     }
 }
 
-const UsersPageApp = AppHOC(UsersPage);
+const UsersPageApp = AppHOC(UsersPage, { isAuthenticated: true });
 
 renderPage(<UsersPageApp />);
