@@ -11,6 +11,15 @@ module.exports = (db) => {
         `);
     }
 
+    function findExistingRequest(userId, recipientId) {
+        return query(`
+            SELECT *
+            FROM friend_requests
+            WHERE sender=${escape(userId)}
+            AND recipient=${escape(recipientId)}
+        `)
+    }
+
     function getIncomingRequestsByUserId(userId) {
         return query(`
             SELECT *
@@ -46,6 +55,7 @@ module.exports = (db) => {
         getOutgoingRequestsByUserId,
         getIncomingRequestsByUserId,
         createFriendRequest,
-        deleteFriendRequest
+        deleteFriendRequest,
+        findExistingRequest
     }
 }

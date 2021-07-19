@@ -19,7 +19,7 @@ export class Authorization extends React.Component {
         });
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = () => {
         const { login, password } = this.state;
 
         axios.post('/api/login', {

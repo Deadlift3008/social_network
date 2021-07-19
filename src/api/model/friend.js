@@ -11,6 +11,14 @@ module.exports = (db) => {
         `);
     }
 
+    function getFriendsIdsByUserId(userId) {
+        return query(`
+            SELECT id 
+            FROM friends f
+            WHERE f.user_id=${escape(userId)}
+        `);
+    }
+
     function createFriend(userId, friendId) {
         const firstRow = [
             escape(userId),
@@ -34,5 +42,6 @@ module.exports = (db) => {
     return {
         getFriendsInfoByUserId,
         createFriend,
+        getFriendsIdsByUserId
     }
 }

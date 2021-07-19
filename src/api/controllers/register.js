@@ -45,7 +45,7 @@ async function register(req, res, next, model) {
 
     if (validationError) {
         res.status(500);
-        res.json({ error: validationError });
+        res.json({ status: 'error', message: validationError });
         return;
     }
 

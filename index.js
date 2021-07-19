@@ -14,7 +14,14 @@ const { AUTH_TYPES } = require('./src/api/constants');
 
 const database = connect();
 const model = createModel(database);
-const createController = (controller) => (req, res, next) => controller(req, res, next, model);
+const createController = (controller) => async (req, res, next) => {
+    try {
+        await controller(req, res, next, model);
+    } catch (err) {
+        res.status(500);
+        res.send('Unexpected error from server: ', JSON.stringify(err));
+    }
+};
 
 passportConfig(model);
 
@@ -29,13 +36,13 @@ app.set('view engine', 'pug');
 app.set('views', './src/views');
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', authenticateMiddleware(AUTH_TYPES.PAGE_AUTH), renderViews.main);
-app.get('/friends', authenticateMiddleware(AUTH_TYPES.PAGE_AUTH), renderViews.friends);
-app.get('/users', authenticateMiddleware(AUTH_TYPES.PAGE_AUTH), renderViews.users);
-app.get('/user', authenticateMiddleware(AUTH_TYPES.PAGE_AUTH), renderViews.user);
+app.get('/', authenticateMiddleware(AUTH_TYPES.PAGE_AUTH), createController(renderViews.main));
+app.get('/friends', authenticateMiddleware(AUTH_TYPES.PAGE_AUTH), createController(renderViews.friends));
+app.get('/users', authenticateMiddleware(AUTH_TYPES.PAGE_AUTH), createController(renderViews.users));
+app.get('/user/:id', authenticateMiddleware(AUTH_TYPES.PAGE_AUTH), createController(renderViews.user));
 app.get('/registration', renderViews.registration);
 app.get('/authorization', renderViews.authorization);
-app.get('/friend_requests', authenticateMiddleware(AUTH_TYPES.PAGE_AUTH), renderViews.friendRequests);
+app.get('/friend_requests', authenticateMiddleware(AUTH_TYPES.PAGE_AUTH), createController(renderViews.friendRequests));
 
 app.post('/api/register', createController(controllers.register));
 app.post('/api/login', authenticateMiddleware(AUTH_TYPES.INITIAL_AUTH), loginMiddleware);

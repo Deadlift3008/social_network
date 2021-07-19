@@ -1,9 +1,10 @@
-async function user(req, res) {
+async function user(req, res, next, model) {
+    const userId = req.params.id;
+    const [user] = await model.user.getUserInfoById(userId);
+
     res.render('user', {
         title: 'Страница пользователя',
-        data: JSON.stringify({
-            test: 'Здесь будут данные'
-        })
+        data: JSON.stringify({ user })
     });
 }
 
