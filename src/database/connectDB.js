@@ -3,13 +3,24 @@ const dbConfig = require('./DB-config');
 const connection = mysql.createConnection(dbConfig);
 
 function connect() {
-    connection.connect(function(err) {
-        if (err) {
-            console.error('error connecting: ' + err.stack);
-            return;
-        }
+    function tryConnect() {
+        connection.connect(function(err) {
+            if (err) {
+                console.error('error connecting: ' + err.stack);
+                return;
+            }
 
-        console.log('connected as id ' + connection.threadId);
+            console.log('connected as id ' + connection.threadId);
+        });
+    }
+
+    tryConnect();
+
+    connection.on('error', function(err) {
+        console.log('CONNECTION_ERROR:' + JSON.stringify(err));
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+            tryConnect();
+        }
     });
 
     return {
