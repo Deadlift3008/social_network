@@ -32,7 +32,8 @@
     "passport-local": "^1.0.0",
     "pug": "^3.0.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "db-migrate-mysql": "^2.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
