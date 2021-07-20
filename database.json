@@ -11,7 +11,7 @@
 
   "prod": {
     "driver": "mysql",
-    "database": "social_network_prod",
+    "database": { "ENV": "DATABASE" },
     "user": { "ENV": "USER" },
     "password": { "ENV": "PASSWORD" },
     "host": { "ENV": "HOST" },
