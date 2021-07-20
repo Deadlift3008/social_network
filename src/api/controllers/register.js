@@ -2,10 +2,18 @@ const encrypt = require('../utils/encrypt');
 
 const validationConfig = {
     login: (value) => {
-        return (!value || value.length > 20) && 'Логин обязателен и не более 20 символов';
+        if (!value) {
+            return 'Логин обязателен';
+        }
+
+        return (value.length > 20) && 'Логин должен быть не более 20 символов';
     },
     password: (value) => {
-        return (!value || value.length > 15 || value.length < 5) && 'Пароль обязателен и должен быть от 5 до 15 символов'
+        if (!value) {
+            return 'Пароль обязателен';
+        }
+
+        return (value.length > 15 || value.length < 3) && 'Пароль должен быть от 3 до 15 символов'
     },
     age: (value) => {
         if (!value) {
@@ -20,7 +28,18 @@ const validationConfig = {
         return value && value.length > 20 && 'Пол должен быть менее 20 символов';
     },
     name: (value) => {
-        return value && (value.length > 15 || value.length < 3) && 'Имя должно быть от 2ух до 15 символов';
+        if (!value) {
+            return 'Имя обязательно';
+        }
+
+        return (value.length > 15 || value.length < 3) && 'Имя должно быть от 2ух до 15 символов';
+    },
+    second_name: (value) => {
+        if (!value) {
+            return 'Фамилия обязательна';
+        }
+
+        return (value.length > 20 || value.length < 3) && 'Фамилия должна быть от 3 до 20 символов';
     },
     city: (value) => {
         return value && (value.length < 3 || value.length > 20) && 'Город должен быть от 3 до 20 символов';
@@ -31,20 +50,23 @@ const validationConfig = {
 };
 
 function validate(fields) {
-    let errorMessage;
+    const validatorsName = Object.keys(validationConfig);
 
-    Object.keys(validationConfig).forEach(fieldName => {
-        errorMessage = validationConfig[fieldName](fields[fieldName]);
-    });
+    for (let i = 0; i < validatorsName.length; i++) {
+        const fieldName = validatorsName[i];
+        const currentError = validationConfig[fieldName](fields[fieldName]);
 
-    return errorMessage;
+        if (currentError) {
+            return currentError;
+        }
+    }
 }
 
 async function register(req, res, next, model) {
     const validationError = validate(req.body);
 
     if (validationError) {
-        res.status(500);
+        res.status(200);
         res.json({ status: 'error', message: validationError });
         return;
     }
@@ -59,8 +81,8 @@ async function register(req, res, next, model) {
         const existingUser = await model.user.findUserByLogin(login);
 
         if (existingUser.length) {
-            res.status(500);
-            res.json({ status: 'Пользователь с таким логином уже существует' });
+            res.status(200);
+            res.json({ status: 'error', message: 'Пользователь с таким логином уже существует' });
 
             return;
         }
