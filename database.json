@@ -15,7 +15,7 @@
     "user": { "ENV": "USER" },
     "password": { "ENV": "PASSWORD" },
     "host": { "ENV": "HOST" },
-    "port": { "ENV": "PORT" },
+    "port": { "ENV": "DB_PORT" },
     "multipleStatements": true
   }
 }
