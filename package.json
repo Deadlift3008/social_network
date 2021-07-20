@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "concurrently --kill-others \"nodemon index.js\" \"webpack\"",
     "build": "cross-env NODE_ENV=production webpack",
+    "start": "node index.js",
     "migrations:dev:up": "db-migrate up -e dev",
     "migrations:dev:down": "db-migrate down -e dev",
     "migrations:prod:up": "node node_modules/db-migrate/bin/db-migrate up -e prod",
