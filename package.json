@@ -8,8 +8,8 @@
     "build": "cross-env NODE_ENV=production webpack",
     "migrations:dev:up": "db-migrate up -e dev",
     "migrations:dev:down": "db-migrate down -e dev",
-    "migrations:prod:up": "db-migrate up -e prod",
-    "migrations:prod:down": "db-migrate down -e prod"
+    "migrations:prod:up": "node node_modules/db-migrate/bin/db-migrate up -e prod",
+    "migrations:prod:down": "node node_modules/db-migrate/bin/db-migrate down -e prod"
   },
   "repository": {
     "type": "git",
