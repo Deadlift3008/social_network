@@ -5,7 +5,7 @@ async function users(req, res, next, model) {
     const outgoingRequests = await model.friendRequest.getOutgoingRequestsByUserId(userId);
 
     const friendsHashMap = friends.reduce((acc, friend) => {
-        acc[friend.id] = true;
+        acc[friend.friend_id] = true;
 
         return acc;
     }, {});
@@ -18,8 +18,8 @@ async function users(req, res, next, model) {
 
     const users = usersInfos.map(userInfo => ({
         ...userInfo,
-        isFriend: Boolean(friendsHashMap[userInfo.id]),
-        alreadyRequested: Boolean(outgoingRequestsMap[userInfo.id])
+        isFriend: Boolean(friendsHashMap[userInfo.user_id]),
+        alreadyRequested: Boolean(outgoingRequestsMap[userInfo.user_id])
     })).filter(({ user_id }) => userId !== user_id);
 
     res.render('users', {

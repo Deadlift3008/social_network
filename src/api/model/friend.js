@@ -13,7 +13,7 @@ module.exports = (db) => {
 
     function getFriendsIdsByUserId(userId) {
         return query(`
-            SELECT id 
+            SELECT f.friend_id 
             FROM friends f
             WHERE f.user_id=${escape(userId)}
         `);
