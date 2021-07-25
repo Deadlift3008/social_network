@@ -4,6 +4,9 @@ const AUTH_TYPES = {
     INITIAL_AUTH: 'INITIAL_AUTH'
 }
 
+const USER_LIST_LIMIT = 10;
+
 module.exports = {
-    AUTH_TYPES
+    AUTH_TYPES,
+    USER_LIST_LIMIT
 }

@@ -1,3 +1,5 @@
+const { USER_LIST_LIMIT } = require('../constants');
+
 module.exports = (db) => {
     const { query, escape } = db;
 
@@ -18,12 +20,20 @@ module.exports = (db) => {
         `);
     }
 
-    function getUsersInfo() {
+    function getUsersCount() {
+        return query(`
+            SELECT COUNT(*) as count FROM users
+        `);
+    }
+
+    function getUsersInfo(offset = 0) {
         return query(`
             SELECT p.user_id, p.age, p.gender, p.name, p.city, p.interests, p.second_name
             FROM users u
             LEFT JOIN personal_info p 
             ON u.id=p.user_id 
+            LIMIT ${USER_LIST_LIMIT}
+            OFFSET ${offset}
         `);
     }
 
@@ -97,6 +107,7 @@ module.exports = (db) => {
         createPersonalData,
         findUserByLoginAndHash,
         findUserById,
-        findUserByLogin
+        findUserByLogin,
+        getUsersCount
     }
 }
