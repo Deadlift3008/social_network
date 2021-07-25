@@ -6,7 +6,7 @@ const validationConfig = {
             return 'Логин обязателен';
         }
 
-        return (value.length > 20) && 'Логин должен быть не более 20 символов';
+        return (value.length > 100) && 'Логин должен быть не более 100 символов';
     },
     password: (value) => {
         if (!value) {
@@ -25,27 +25,27 @@ const validationConfig = {
         }
     },
     gender: (value) => {
-        return value && value.length > 20 && 'Пол должен быть менее 20 символов';
+        return value && value.length > 30 && 'Пол должен быть менее 30 символов';
     },
     name: (value) => {
         if (!value) {
             return 'Имя обязательно';
         }
 
-        return (value.length > 15 || value.length < 3) && 'Имя должно быть от 2ух до 15 символов';
+        return (value.length > 30 || value.length < 3) && 'Имя должно быть от 2ух до 30 символов';
     },
     second_name: (value) => {
         if (!value) {
             return 'Фамилия обязательна';
         }
 
-        return (value.length > 20 || value.length < 3) && 'Фамилия должна быть от 3 до 20 символов';
+        return (value.length > 30 || value.length < 3) && 'Фамилия должна быть от 3 до 30 символов';
     },
     city: (value) => {
-        return value && (value.length < 3 || value.length > 20) && 'Город должен быть от 3 до 20 символов';
+        return value && (value.length < 3 || value.length > 30) && 'Город должен быть от 3 до 30 символов';
     },
     interests: (value) => {
-        return value && value.length > 140 && 'Интересы должны быть менее 140 символов';
+        return value && value.length > 240 && 'Интересы должны быть менее 240 символов';
     },
 };
 

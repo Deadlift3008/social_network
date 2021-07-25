@@ -19,7 +19,7 @@ const createController = (controller) => async (req, res, next) => {
         await controller(req, res, next, model);
     } catch (err) {
         res.status(500);
-        res.send('Unexpected error from server: ', JSON.stringify(err));
+        res.send(`Unexpected error from server: code - ${err.code}, message - ${err.message}`);
     }
 };
 

@@ -10,7 +10,8 @@
     "migrations:dev:up": "db-migrate up -e dev",
     "migrations:dev:down": "db-migrate down -e dev",
     "migrations:prod:up": "node node_modules/db-migrate/bin/db-migrate up -e prod",
-    "migrations:prod:down": "node node_modules/db-migrate/bin/db-migrate down -e prod"
+    "migrations:prod:down": "node node_modules/db-migrate/bin/db-migrate down -e prod",
+    "generate-profiles": "node --max-old-space-size=8192 tools/generate-profiles.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "db-migrate": "^0.11.12",
+    "db-migrate-mysql": "^2.1.2",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.6",
     "express-session": "^1.17.2",
@@ -33,8 +35,7 @@
     "passport-local": "^1.0.0",
     "pug": "^3.0.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "db-migrate-mysql": "^2.1.2"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -46,6 +47,7 @@
     "concurrently": "^6.2.0",
     "cross-env": "^7.0.3",
     "db-migrate-mysql": "^2.1.2",
+    "faker": "^5.5.3",
     "nodemon": "^2.0.8",
     "webpack": "^5.41.1",
     "webpack-cli": "^4.7.2"
