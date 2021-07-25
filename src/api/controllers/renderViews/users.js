@@ -1,7 +1,12 @@
 const { USER_LIST_LIMIT } = require('../../constants');
 
 async function users(req, res, next, model) {
-    const offset = req.query.offset || 0;
+    let offset = parseInt(req.query.offset || 0, 10);
+
+    if (isNaN(offset)) {
+        offset = 0;
+    }
+
     const usersInfos = await model.user.getUsersInfo(offset);
     const userId = req.session.passport.user;
     const friends = await model.friend.getFriendsIdsByUserId(userId);
@@ -37,12 +42,15 @@ async function users(req, res, next, model) {
         prevOffsetToShow = offset === 0 ? undefined : 0;
     }
 
+    const pageNumber = Math.ceil(offset / USER_LIST_LIMIT) + 1;
+
     res.render('users', {
         title: 'Пользователи',
         data: JSON.stringify({
             users,
             nextOffsetToShow,
-            prevOffsetToShow
+            prevOffsetToShow,
+            pageNumber
         })
     });
 }
