@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { createUsersLink } from '../utils/createUsersLink';
 
 export class Pagination extends React.Component {
     render() {
@@ -10,7 +11,7 @@ export class Pagination extends React.Component {
         return (
             <div className="pagination-block">
                 {Number.isInteger(prevOffset) ? (
-                    <a href={`/users?offset=${prevOffset}`} className="pagination__link">
+                    <a href={createUsersLink({ offset: prevOffset })} className="pagination__link">
                         <div className="pagination-block__item">
                             <i className="pagination-block__angle">{leftSign}</i>
                         </div>
@@ -18,7 +19,7 @@ export class Pagination extends React.Component {
                 ) : null}
                 <div className="pagination-block__item pagination-block__page-number">{pageNumber}</div>
                 {Number.isInteger(nextOffset) ? (
-                    <a href={`/users?offset=${nextOffset}`} className="pagination__link">
+                    <a href={createUsersLink({ offset: nextOffset })} className="pagination__link">
                         <div className="pagination-block__item">
                             <i className="pagination-block__angle">{rightSign}</i>
                         </div>

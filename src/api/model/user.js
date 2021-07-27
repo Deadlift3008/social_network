@@ -3,6 +3,19 @@ const { USER_LIST_LIMIT } = require('../constants');
 module.exports = (db) => {
     const { query, escape } = db;
 
+    function getLikeExpressionFromSearchParams(searchParams, prefix) {
+        let likeExpression = '';
+        const searchKeys = Object.keys(searchParams).filter(key => Boolean(searchParams[key]));
+
+        if (searchKeys.length) {
+            likeExpression = 'WHERE ' + searchKeys
+                .map(key => `${prefix || ''}${key} LIKE ${escape(searchParams[key] + '%')}`)
+                .join('\nAND ');
+        }
+
+        return likeExpression;
+    }
+
     function findUserByLoginAndHash(login, hash) {
         return query(`
             SELECT *
@@ -20,20 +33,26 @@ module.exports = (db) => {
         `);
     }
 
-    function getUsersCount() {
+    function getUsersCount(searchParams) {
         return query(`
-            SELECT COUNT(*) as count FROM users
+            SELECT COUNT(*) as count 
+            FROM users u
+            LEFT JOIN personal_info p
+            ON u.id=p.user_id 
+            ${getLikeExpressionFromSearchParams(searchParams, 'p.')}
         `);
     }
 
-    function getUsersInfo(offset = 0) {
+    function getUsersInfo(offset, searchParams) {
         return query(`
             SELECT p.user_id, p.age, p.gender, p.name, p.city, p.interests, p.second_name
             FROM users u
             LEFT JOIN personal_info p 
             ON u.id=p.user_id 
+            ${getLikeExpressionFromSearchParams(searchParams, 'p.')}
+            GROUP BY p.user_id
             LIMIT ${USER_LIST_LIMIT}
-            OFFSET ${offset}
+            OFFSET ${escape(offset)}
         `);
     }
 

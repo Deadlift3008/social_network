@@ -2,16 +2,22 @@ const { USER_LIST_LIMIT } = require('../../constants');
 
 async function users(req, res, next, model) {
     let offset = parseInt(req.query.offset || 0, 10);
+    const { name, secondName } = req.query;
+
+    const searchParams = {
+        name,
+        second_name: secondName
+    }
 
     if (isNaN(offset)) {
         offset = 0;
     }
 
-    const usersInfos = await model.user.getUsersInfo(offset);
+    const usersInfos = await model.user.getUsersInfo(offset, searchParams);
     const userId = req.session.passport.user;
     const friends = await model.friend.getFriendsIdsByUserId(userId);
     const outgoingRequests = await model.friendRequest.getOutgoingRequestsByUserId(userId);
-    const [countResponse] = await model.user.getUsersCount();
+    const [countResponse] = await model.user.getUsersCount(searchParams);
     const usersCount = countResponse.count;
 
     const friendsHashMap = friends.reduce((acc, friend) => {
