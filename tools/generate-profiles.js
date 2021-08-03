@@ -4,8 +4,14 @@ const axios = require('axios');
 const count = process.env.COUNT || 10;
 const url = process.env.URL || 'http://localhost:3000/api/register';
 
+function getDiffTimeInSec(startTime) {
+    return (Date.now() - startTime) / 1000;
+}
+
 (async function() {
     let done = 0;
+
+    const startTime = Date.now();
 
     try {
         for (let i = 0; i < count; i++) {
@@ -31,10 +37,11 @@ const url = process.env.URL || 'http://localhost:3000/api/register';
 
             done += 1;
         }
-        console.log('Done - ', done);
+
+        console.log(`Done for ${done} profiles in ${getDiffTimeInSec(startTime)} sec`);
     } catch (e) {
         console.log('ERROR');
         console.log(e);
-        console.log('Done - ', done);
+        console.log(`Done for ${done} profiles in ${getDiffTimeInSec(startTime)} sec`);
     }
 })();

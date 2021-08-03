@@ -8,7 +8,8 @@ async function encrypt(password) {
             reject('Соль не установлена!');
         }
 
-        crypto.pbkdf2(password, salt, 10000, 64, 'sha512', (err, derivedKey) => {
+        // упростил для заливки профилей
+        crypto.pbkdf2(password, salt, 10, 16, 'sha512', (err, derivedKey) => {
             if (err) {
                 reject(err);
             }
