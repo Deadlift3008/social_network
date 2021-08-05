@@ -33,6 +33,15 @@ module.exports = (db) => {
         `);
     }
 
+    function findUserByNameAndSecondName(name, second_name) {
+        return query(`
+            SELECT user_id
+            FROM personal_info
+            WHERE name=${escape(name)}
+            AND second_name=${escape(second_name)}
+        `);
+    }
+
     function getUsersCount(searchParams) {
         return query(`
             SELECT COUNT(*) as count 
@@ -100,6 +109,13 @@ module.exports = (db) => {
         `);
     }
 
+    function deleteUserIfExists(login) {
+        return query(`
+            DELETE FROM users
+            WHERE login=${escape(login)}
+        `);
+    }
+
     function createPersonalData(personalData) {
         const { userId, age, gender, name, city, interests, second_name } = personalData;
         const values = [
@@ -127,6 +143,8 @@ module.exports = (db) => {
         findUserByLoginAndHash,
         findUserById,
         findUserByLogin,
-        getUsersCount
+        getUsersCount,
+        deleteUserIfExists,
+        findUserByNameAndSecondName
     }
 }

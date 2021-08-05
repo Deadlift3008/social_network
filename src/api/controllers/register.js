@@ -87,6 +87,15 @@ async function register(req, res, next, model) {
             return;
         }
 
+        const existingNameAndSecondName = await model.user.findUserByNameAndSecondName(name, second_name);
+
+        if (existingNameAndSecondName.length) {
+            res.status(200);
+            res.json({ status: 'error', message: 'Пользователь с таким именем и фамилией уже существуют' });
+
+            return;
+        }
+
         const hashPassword = await encrypt(password);
 
         const created = await model.user.createUser({
@@ -109,7 +118,9 @@ async function register(req, res, next, model) {
         res.status(200);
         res.json({ status: 'ok' });
     } catch (err) {
-        res.status(500).send({ error: JSON.stringify(err) });
+        await model.user.deleteUserIfExists(login);
+        res.status(500);
+        res.json({ error: JSON.stringify(err) });
     }
 }
 
