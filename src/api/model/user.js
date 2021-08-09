@@ -45,23 +45,19 @@ module.exports = (db) => {
     function getUsersCount(searchParams) {
         return query(`
             SELECT COUNT(*) as count 
-            FROM users u
-            LEFT JOIN personal_info p
-            ON u.id=p.user_id 
+            FROM personal_info p
             ${getLikeExpressionFromSearchParams(searchParams, 'p.')}
         `);
     }
 
     function getUsersInfo(offset, searchParams) {
         return query(`
-            SELECT p.user_id, p.age, p.gender, p.name, p.city, p.interests, p.second_name
-            FROM users u
-            LEFT JOIN personal_info p 
-            ON u.id=p.user_id 
+            SELECT p.user_id, p.age, p.gender, p.name, p.city, p.interests, p.second_name 
+            FROM personal_info p
             ${getLikeExpressionFromSearchParams(searchParams, 'p.')}
             GROUP BY p.user_id
             LIMIT ${USER_LIST_LIMIT}
-            OFFSET ${escape(offset)}
+            OFFSET ${escape(offset)} 
         `);
     }
 
@@ -75,11 +71,9 @@ module.exports = (db) => {
 
     function getUserInfoById(id) {
         return query(`
-            SELECT p.user_id, p.age, p.gender, p.name, p.city, p.interests, p.second_name 
-            FROM users u  
-            LEFT JOIN personal_info p
-            ON u.id=p.user_id 
-            WHERE id=${escape(id)}
+            SELECT user_id, age, gender, name, city, interests, second_name 
+            FROM personal_info   
+            WHERE user_id=${escape(id)}
         `);
     }
 
@@ -87,11 +81,9 @@ module.exports = (db) => {
         const escapedIds = ids.map(id => escape(id))
 
         return query(`
-            SELECT p.user_id, p.age, p.gender, p.name, p.city, p.interests, p.second_name
-            FROM users u
-            LEFT JOIN personal_info p
-            ON u.id=p.user_id
-            WHERE u.id IN (${escapedIds.join(',')})
+            SELECT user_id, age, gender, name, city, interests, second_name
+            FROM personal_info
+            WHERE user_id IN (${escapedIds.join(',')})
         `);
     }
 
